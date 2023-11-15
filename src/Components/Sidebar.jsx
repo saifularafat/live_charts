@@ -1,9 +1,13 @@
+import Charts from "./Charts";
 import Navber from "./Navber";
+import Search from "./Search";
 
 const Sidebar = () => {
     return (
         <div className="col-span-2 bg-slate-700">
-            <Navber />
+                <Navber />
+                <Search />
+                <Charts />
         </div>
     );
 };
