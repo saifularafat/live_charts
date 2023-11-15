@@ -2,7 +2,7 @@
 const Message = () => {
     return (
         <div>
-            <h2>Message</h2>
+            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, voluptate.</h2>
         </div>
     );
 };

@@ -5,3 +5,38 @@
 .input_filed {
   @apply outline-none border-0 border-b-2 border-slate-400 rounded shadow-2xl py-3 px-3 placeholder:text-slate-400 text-slate-800 font-medium placeholder:font-normal ;
 }
+
+/* scroll sidebar style */
+.myScroll:hover::-webkit-scrollbar-thumb {
+  background-color:#122033;
+}
+
+.myScroll::-webkit-scrollbar {
+  width: 0.4rem;
+}
+
+.myScroll::-webkit-scrollbar-track {
+  background-color: #334155;
+}
+
+.myScroll::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 7rem;
+}
+/* scroll main  Content style */
+.myScrollMain:hover::-webkit-scrollbar-thumb {
+  background-color:#64748B;
+}
+
+.myScrollMain::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+.myScrollMain::-webkit-scrollbar-track {
+  background-color: #E2E8F0;
+}
+
+.myScrollMain::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 7rem;
+}

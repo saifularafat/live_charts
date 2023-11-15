@@ -13,7 +13,7 @@ const Chart = () => {
     return (
         <div className="col-span-4 bg-slate-200 ">
             {/* Header section start*/}
-            <div className="flex items-center justify-between py-[10px] px-4 bg-slate-500">
+            <div className="flex items-center justify-between py-[10px] px-4 bg-slate-500 sticky top-0 z-10">
                 <div>
                     <h2 className="text-xl font-medium text-white leading-none">User Name</h2>
                     <div className="flex items-center gap-1">
@@ -52,9 +52,7 @@ const Chart = () => {
                 </div>
             </div>
             {/* Header section end*/}
-            {/* <div className="overflow-y-scroll overflow-x-hidden scroll-smooth "> */}
-                <Messages />
-            {/* </div> */}
+            <Messages />
             <Input />
         </div>
     );
