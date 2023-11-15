@@ -1,8 +1,8 @@
 
 const Chart = () => {
     return (
-        <div>
-            
+        <div className="col-span-4 bg-slate-100 ">
+            <h3>Chart</h3>
         </div>
     );
 };
