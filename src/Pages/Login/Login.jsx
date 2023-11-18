@@ -36,8 +36,8 @@ const Login = () => {
                     <input type="password" name="password" id="" placeholder="*******" required className="font-normal input_filed" /><br />
                     <input type="submit" value="Submit" className="w-full bg-blue-700 rounded-lg py-2 px-3 text-white text-xl font-medium cursor-pointer" />
                 </form>
-                <span>{error && "Somethings is wrong!"}</span>
-                <span>{loading && "Loading....!"}</span>
+                {loading && <span className="text-blue-600 ">Loading..</span>}
+                {error && <span className="text-red-600 ">something is error..</span>}
                 <p className="text-sm">You don't have an account? <Link to="/register" className="text-sm font-serif font-medium text-blue-800 hover:text-red-800">Register</Link></p>
             </div>
         </div>

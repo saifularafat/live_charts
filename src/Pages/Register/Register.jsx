@@ -57,16 +57,6 @@ const Register = () => {
             setError(true)
             setLoading(false)
         }
-        // .then((userCredential) => {
-        //     // Signed up 
-        //     const user = userCredential.user;
-        //     // ...
-        // })
-        // .catch((error) => {
-        //     const errorCode = error.code;
-        //     const errorMessage = error.message;
-        //     // ..
-        // });
     }
     return (
         <div className="flex items-center justify-center bg-blue-400 h-screen">
