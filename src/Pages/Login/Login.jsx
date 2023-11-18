@@ -1,13 +1,27 @@
-import { Link } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../../firebase.config";
+import { useState } from "react";
 
 const Login = () => {
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
+        setLoading(true)
         e.preventDefault();
         const form = e.target
         const email = form.email.value;
         const password = form.password.value;
-        console.log( email, password);
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password)
+            navigate("/")
+        } catch (error) {
+            setError(true)
+            setLoading(false)
+        }
     }
     return (
         <div className="flex items-center justify-center bg-blue-400 h-screen">
@@ -22,6 +36,8 @@ const Login = () => {
                     <input type="password" name="password" id="" placeholder="*******" required className="font-normal input_filed" /><br />
                     <input type="submit" value="Submit" className="w-full bg-blue-700 rounded-lg py-2 px-3 text-white text-xl font-medium cursor-pointer" />
                 </form>
+                <span>{error && "Somethings is wrong!"}</span>
+                <span>{loading && "Loading....!"}</span>
                 <p className="text-sm">You don't have an account? <Link to="/register" className="text-sm font-serif font-medium text-blue-800 hover:text-red-800">Register</Link></p>
             </div>
         </div>
