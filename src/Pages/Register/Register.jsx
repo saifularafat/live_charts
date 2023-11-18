@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../../firebase.config";
 import {
@@ -12,6 +12,8 @@ import { useState } from "react";
 const Register = () => {
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         setLoading(true)
         e.preventDefault();
@@ -19,7 +21,7 @@ const Register = () => {
         const displayName = form.displayName.value;
         const email = form.email.value;
         const password = form.password.value;
-        const file = form.photoUrl.file;
+        const file = form.photoUrl.files;
 
         try {
             const res = await createUserWithEmailAndPassword(auth, email, password)
@@ -39,11 +41,14 @@ const Register = () => {
                         });
                         await setDoc(doc(db, 'users', res.user.uid), {
                             uid: res.user.uid,
-                            displayName, 
+                            displayName,
                             email,
-                            password, 
+                            password,
                             photoURL: downloadURL,
-                        })
+                        });
+
+                        await setDoc(doc(db, "userChats", res.user.uid), {});
+                        navigate("/")
                     });
 
                 }

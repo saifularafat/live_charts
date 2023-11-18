@@ -2,14 +2,20 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 const App = () => {
+  const { currentUser } = useContext(AuthContext);
+  console.log(currentUser);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="login" element={<Login />}></Route>
-        <Route path="register" element={<Register />}></Route>
+        <Route path="/">
+          <Route index element={<Home />}></Route>
+          <Route path="login" element={<Login />}></Route>
+          <Route path="register" element={<Register />}></Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   );
