@@ -24,38 +24,42 @@ const Register = () => {
         const file = form.photoUrl.files;
 
         try {
-            const res = await createUserWithEmailAndPassword(auth, email, password)
-            console.log(res);
-            const storageRef = ref(storage, displayName);
-            const uploadTask = uploadBytesResumable(storageRef, file);
-            uploadTask.on(
+            //Create user
+            const res = await createUserWithEmailAndPassword(auth, email, password);
 
-                (error) => {
-                    setError(true)
-                },
-                () => {
-                    getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            //Create a unique image name
+            const date = new Date().getTime();
+            const storageRef = ref(storage, `${displayName + date}`);
+
+            await uploadBytesResumable(storageRef, file).then(() => {
+                getDownloadURL(storageRef).then(async (downloadURL) => {
+                    try {
+                        //Update profile
                         await updateProfile(res.user, {
                             displayName,
                             photoURL: downloadURL,
                         });
-                        await setDoc(doc(db, 'users', res.user.uid), {
+                        //create user on firestore
+                        await setDoc(doc(db, "users", res.user.uid), {
                             uid: res.user.uid,
                             displayName,
                             email,
-                            password,
                             photoURL: downloadURL,
                         });
 
+                        //create empty user chats on firestore
                         await setDoc(doc(db, "userChats", res.user.uid), {});
-                        navigate("/")
-                    });
-
-                }
-            );
-        } catch (error) {
-            setError(true)
-            setLoading(false)
+                        navigate("/");
+                    } catch (err) {
+                        // console.log(err);
+                        setError(true);
+                        setLoading(false);
+                    }
+                });
+            });
+        } catch (err) {
+            setErr(true);
+            setLoading(false);
         }
     }
     return (

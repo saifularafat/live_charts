@@ -2,20 +2,25 @@ import { BsCameraVideoFill, BsCameraVideoOffFill } from "react-icons/bs"
 import { IoMdPersonAdd } from "react-icons/io"
 import { FaUsers } from "react-icons/fa"
 import { HiOutlineDotsVertical } from "react-icons/hi"
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Messages from "./Messages";
 import Input from "./Input";
+import { ChatContext } from "../context/ChatContext";
 
 const Chart = () => {
     const [videoCamera, setVideoCamera] = useState(false);
     const [addUsers, setAddUsers] = useState(false);
     const [menuBar, setMenuBar] = useState(false);
+
+    const { data } = useContext(ChatContext);
+    console.log(data);
+
     return (
         <div className="col-span-4 bg-slate-200 ">
             {/* Header section start*/}
             <div className="flex items-center justify-between py-[10px] px-4 bg-slate-500 sticky top-0 z-10">
                 <div>
-                    <h2 className="text-xl font-medium text-white leading-none">User Name</h2>
+                    <h2 className="text-xl font-medium text-white leading-none">{data.user?.displayName}</h2>
                     <div className="flex items-center gap-1">
                         <span className="bg-green-500 h-2 w-2 rounded-full"></span>
                         <span className="text-sm text-green-600">Active</span>
